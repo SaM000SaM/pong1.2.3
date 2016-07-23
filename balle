@@ -1,0 +1,62 @@
+void balle(int posx, int posy, int nb_balle) {
+  fill(255);
+
+  //            set de la position initiale de la balle
+
+  if (nbb[nb_balle]==false) {
+    pos_balle_x[nb_balle]=posx;
+    pos_balle_y[nb_balle]=posy;
+    nbb[nb_balle]=true;
+  }
+
+  //             détection de la colision en bas de l'écrans
+
+  if (pos_balle_y[nb_balle] > 600) pos_balle_y0[nb_balle] = -4;
+
+
+  //             détection de la colision en haut de l'écrans
+
+  if (pos_balle_y[nb_balle] < 10 )pos_balle_y0[nb_balle] = 4;
+
+
+  //             détection de la colision à droite de l'écrans
+
+  if (pos_balle_x[nb_balle] >width - 10 ) pos_balle_x0[nb_balle] = -4;
+
+
+  //             détection de la colision avec la raquette
+
+  if (pos_balle_y[nb_balle] < pos_raquette +50 && pos_balle_y[nb_balle] > pos_raquette -50) {
+    if (pos_balle_x[nb_balle] <= 30) pos_balle_x0[nb_balle] = 4;
+  }
+
+
+
+
+  //                     sortie
+
+  if (pos_balle_x[nb_balle]<10 && mem[nb_balle]==false) {
+    vie--;
+    pos_balle_x[nb_balle]=300;
+    pos_balle_y[nb_balle]=50+nb_balle;
+  } else mem[nb_balle]=false;
+
+
+//if (pos_balle_x[nb_balle] < 10 ) pos_balle_x0[nb_balle] = 4;
+
+
+
+
+  //             déplacement horisontal de la balle
+
+  pos_balle_x[nb_balle] = pos_balle_x[nb_balle]+ pos_balle_x0[nb_balle];
+
+
+
+
+  //             déplacement vertical de la balle
+
+  pos_balle_y[nb_balle] = pos_balle_y[nb_balle] + pos_balle_y0[nb_balle];
+
+  ellipse(pos_balle_x[nb_balle], pos_balle_y[nb_balle], 20, 20);
+}

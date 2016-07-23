@@ -1,0 +1,57 @@
+/*
+ #((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((#
+ #    /\         /\              /\    /\           /\         /\              /\    /\       # 
+ #   //\\       //\\            //\\  //\\         //\\       //\\            //\\  //\\      #
+ #   \\        //  \\          //  \\//  \\        \\        //  \\          //  \\//  \\     #
+ #    \\      //====\\        //    \/    \\        \\      //====\\        //    \/    \\    #
+ #  \\//     //      \\      //            \\     \\//     //      \\      //            \\   #
+ #   \/     //        \\    //              \\     \/     //        \\    //              \\  #
+ #))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))#
+ */
+
+//                variables
+
+//boutons utilisés : 0,1,2,3,4,5,6,7,8,9
+
+int nombre, vie=3, nb_balle=1, ecran=0, pos_raquette=300, nb_obstacles;
+boolean bloc, bloc_s, option, set;
+boolean[]sortie_bouton = new boolean[20], nbb=new boolean [5], mem=new boolean[5] , nbo=new boolean [5];
+String type;
+int[] pos_balle_x=new int[6], pos_balle_y=new int[6], pos_balle_x0=new int[6], pos_balle_y0=new int[6], pos_obstacles=new int[6], pos_obstacles0=new int[6];
+
+//              au démarage
+void setup() {
+  size(800, 600);
+  ellipseMode(CENTER);
+  for (int a=0; a<5; a++) {
+  pos_balle_x0[a]=4;
+  pos_balle_y0[a]=4;
+  pos_obstacles0[a]=1;
+  mem[a]=false;}
+  ecran=0;
+}
+
+//           à chaque rafraichissement
+void draw() {
+
+  //gestion des écrans
+
+  switch (ecran) {
+
+  case 0 :
+    debut();
+    break;
+
+  case 1 :
+    options();
+    break;
+
+  case 2 :
+    jeu();
+    break;
+
+  case 3 :
+    game_over();  
+    break;
+  }
+}

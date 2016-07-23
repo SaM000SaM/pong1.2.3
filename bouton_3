@@ -1,0 +1,83 @@
+/*                     ATTENTION LES SOUS PROGRAMMES DES BOUTONS NE FONCTIONNENT QUE EN RECTMODE CORNER
+*/
+boolean boutonRect(String type, int position_x, int position_y, int largeure, int hauteure, int select_rouge, int select_vert, int select_bleu, int clic_rouge, int clic_vert, int clic_bleu, int nombre) {
+  fill(255);
+  
+  
+//                sélection du fonctionnement du bouton
+
+  switch(type) {
+  case"poussoir":
+
+    poussoir(position_x, position_y, largeure, hauteure, select_rouge, select_vert, select_bleu, nombre);
+    
+    break;
+  
+  case"toggle":
+
+    toggle(position_x, position_y, largeure, hauteure, select_rouge, select_vert, select_bleu, nombre);
+
+    break;
+
+  case"front":
+
+
+    front(position_x, position_y, largeure, hauteure, select_rouge, select_vert, select_bleu, nombre); 
+    
+    break;
+  }
+  
+  
+//             changement de la couleur du bouton lorce que la sortie est activée
+
+  if (sortie_bouton[nombre]==true) fill(clic_rouge, clic_vert, clic_bleu);
+  
+  
+//             dessin du bouton
+  rect(position_x, position_y, largeure, hauteure);
+
+  
+//             envoit de la sortie du bouton au programme
+
+  return sortie_bouton[nombre];
+}
+boolean front(int position_x, int position_y, int largeure, int hauteure, int select_rouge, int select_vert, int select_bleu, int nombre) {
+  if (position_x<=mouseX && mouseX<=largeure+position_x && position_y<=mouseY && mouseY<=hauteure+position_y) {//******detection de la sourie
+    fill(select_rouge, select_vert, select_bleu);//*******coloration du bouton au passage de la sourie
+
+    if (mousePressed && mouseButton==LEFT ) {//******detection du clic
+      if (bloc==false) {
+        bloc=true;
+        sortie_bouton[nombre]=true;
+      } else sortie_bouton[nombre]=false;
+    } else bloc=false;
+  }
+  return sortie_bouton[nombre];
+}
+boolean toggle(int position_x, int position_y, int largeure, int hauteure, int select_rouge, int select_vert, int select_bleu, int nombre) {
+  if (position_x<=mouseX && mouseX<=largeure+position_x && position_y<=mouseY && mouseY<=hauteure+position_y) {//*******************************************detection de la sourie
+    fill(select_rouge, select_vert, select_bleu);//***********************************************************************************coloration du bouton au passage de la sourie
+    if (mousePressed && mouseButton==LEFT && bloc_s == false) {//************************************************************************************************detection du clic   
+      if (sortie_bouton [nombre] == true && bloc == false ) {//*********************************************************************************************enregistrement du clic   
+        sortie_bouton[nombre] = false; 
+        bloc = true;
+      }
+      if (sortie_bouton [nombre] == false && bloc == false ) {
+        sortie_bouton [nombre] = true; 
+        bloc = true;
+      }
+      bloc_s = true;
+    }
+    if (mousePressed == false) bloc_s = false;
+  } else bloc = false;
+  return sortie_bouton[nombre];
+}
+boolean poussoir(int position_x, int position_y, int largeure, int hauteure, int select_rouge, int select_vert, int select_bleu, int nombre) {
+  if (position_x<=mouseX && mouseX<=largeure+position_x && position_y<=mouseY && mouseY<=hauteure+position_y) {//*******************************************detection de la sourie
+    fill(select_rouge, select_vert, select_bleu);//***********************************************************************************coloration du bouton au passage de la sourie
+    if (mousePressed && mouseButton==LEFT) {//*******************************************************************************************************************detection du clic
+      if (sortie_bouton [nombre] == false) sortie_bouton[nombre] = true;
+    } else sortie_bouton[nombre] = false;
+  } else sortie_bouton[nombre] = false;
+  return sortie_bouton[nombre];
+}

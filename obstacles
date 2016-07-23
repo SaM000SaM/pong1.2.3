@@ -1,0 +1,39 @@
+void obstacles( int pos_x, int pos_y, int nb_obstacles) {
+
+
+  //            set de la position initiale de la balle
+
+  if (nbo[nb_obstacles]==false) {
+    pos_obstacles[nb_obstacles]=pos_y;
+    nbo[nb_obstacles]=true;
+  }
+  //             détection de la colision en bas de l'écrans
+
+  if (pos_obstacles[nb_obstacles] > 575) pos_obstacles0[nb_obstacles] = -1;
+
+
+  //             détection de la colision en haut de l'écrans
+
+  if (pos_obstacles[nb_obstacles] < 25 )pos_obstacles0[nb_obstacles] = 1;
+
+  //             détection des balles obstacle
+
+  for ( int z=0; z < nb_balle; z++) {
+    
+    if (pos_balle_y[z] < pos_obstacles[nb_obstacles]+25 && pos_balle_y[z] > pos_obstacles[nb_obstacles] -25 ) {
+
+      if (pos_balle_x[z] < 510 && pos_balle_x[z] > 490) {
+        
+        pos_balle_x0[z] = -pos_balle_x0[z];
+        
+      }
+    }
+  }
+
+  //               déplacement de l'obstacle
+
+  pos_obstacles[nb_obstacles] = pos_obstacles[nb_obstacles]+ pos_obstacles0[nb_obstacles];
+
+
+  rect( pos_x, pos_obstacles[nb_obstacles], 20, 50);
+}
